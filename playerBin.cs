@@ -65,23 +65,23 @@ namespace ReduceReuseRecycle
                }
                else if (touchPosition.X > Location.X + Width / 2)
                {
-                   var newVelocity = new Vector2(3f, 0);
+                   var newVelocity = new Vector2(6f, 0);
                    Velocity = newVelocity;
                }
                else if (touchPosition.Y < Location.Y + Height / 2)
                {
-                   var newVelocity = new Vector2(-3f, 0);
+                   var newVelocity = new Vector2(-6f, 0);
                    Velocity = newVelocity;
                }
            }
            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
                     {
-                        var newVelocity = new Vector2(-3f, 0);
+                        var newVelocity = new Vector2(-6f, 0);
                         Velocity = newVelocity;
                     }
                     else if (Keyboard.GetState().IsKeyDown(Keys.Right))
                     {
-                        var newVelocity = new Vector2(3f, 0);
+                        var newVelocity = new Vector2(6f, 0);
                         Velocity = newVelocity;
                     }
                     else if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.Down))

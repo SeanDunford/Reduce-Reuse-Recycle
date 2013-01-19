@@ -25,7 +25,7 @@ namespace ReduceReuseRecycle
         {
             var scoreText = string.Format("{0}:{1}", PlayerScore, ComputerScore ); 
             var xPosition = ((gameBoundaries.Width/2 )- (font.MeasureString(scoreText).X/2));
-            var Position = new Vector2(xPosition, gameBoundaries.Height - 100);
+            var Position = new Vector2(xPosition, gameBoundaries.Height/2);
 
             spriteBatch.DrawString(font, scoreText, Position, Color.White); 
         }

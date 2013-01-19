@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Game1.cs" />
     <Compile Include="Icon.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="playerBin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Score.cs" />
