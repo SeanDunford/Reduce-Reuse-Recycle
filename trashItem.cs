@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,12 @@ namespace ReduceReuseRecycle
         }
         public override void Update(GameTime aGameTime, gameObjects aGameObjects)
         {
-        
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)  //Change to Game Started.....
+            {
+                var newVelocity = new Vector2(0f, 5f);
+                Velocity = newVelocity;
+            }
+            base.Update(aGameTime, aGameObjects);
         }
 
     }

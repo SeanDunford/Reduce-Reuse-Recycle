@@ -23,7 +23,6 @@ namespace ReduceReuseRecycle
         private Boolean _windowIsSnapped;
         private Score _score;
         private gameObjects _gameObjects;
-        private List<trashItem> _fallingItems = new List<trashItem>(); 
 
         public Game1()
         {
@@ -63,8 +62,6 @@ namespace ReduceReuseRecycle
             var recycleItem1 = new trashItem(recycleItem1Texture, recylceItemLocation, _gameBoundaries);
             recycleItem1.setTrashType(TrashType.Trash);
 
-            _fallingItems.Add(trashItem1);
-            _fallingItems.Add(recycleItem1); 
             //Abstract to Level Defined Method or some ish.....
             
             var iconTexture = new Texture2D(GraphicsDevice, 100, 100); 
@@ -81,7 +78,8 @@ namespace ReduceReuseRecycle
             _gameObjects.RecycleBin = recycleBin; 
             _gameObjects.Score = score;
             _gameObjects.Icon = icon;
-            _gameObjects.FallingItems = _fallingItems; 
+            _gameObjects.trashItem1 = trashItem1;
+            _gameObjects.recycleItem1 = recycleItem1; 
 
         }
         protected override void UnloadContent()
@@ -101,17 +99,15 @@ namespace ReduceReuseRecycle
                 _gameObjects.TrashBin.Update(gameTime, _gameObjects);
                 _gameObjects.RecycleBin.Update(gameTime, _gameObjects); 
                 _gameObjects.Score.Update(gameTime, _gameObjects);
-                foreach(trashItem aTrashItem in _gameObjects.FallingItems)
-                {
-                    aTrashItem.Update(gameTime, _gameObjects); 
-                }
+                _gameObjects.recycleItem1.Update(gameTime, _gameObjects);
+                _gameObjects.trashItem1.Update(gameTime, _gameObjects); 
             }
 
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(new Color(76, 246, 255));
+            GraphicsDevice.Clear(new Color(43,85,5));
             _spriteBatch.Begin(); 
             //MustBegin
             if (_windowIsSnapped)
@@ -124,10 +120,9 @@ namespace ReduceReuseRecycle
             {
                 _gameObjects.TrashBin.Draw(_spriteBatch);
                 _gameObjects.RecycleBin.Draw(_spriteBatch);
-                foreach (trashItem aTrashItem in _gameObjects.FallingItems)
-                {
-                    aTrashItem.Draw(_spriteBatch);
-                }
+                _gameObjects.trashItem1.Draw(_spriteBatch);
+                _gameObjects.recycleItem1.Draw(_spriteBatch); 
+
             }
             //MustEnd
             _spriteBatch.End(); 

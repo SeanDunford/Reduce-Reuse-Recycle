@@ -12,7 +12,9 @@ namespace ReduceReuseRecycle
         public playerBin RecycleBin { get; set; }
         public Score Score { get; set; }
         public Icon Icon { get; set; }
-        public List<trashItem> FallingItems{get; set;}
+        public trashItem trashItem1 { get; set; }
+        public trashItem recycleItem1 { get; set; }
+        //public List<trashItem> FallingItems{get; set;}
         
     }
 }
