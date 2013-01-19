@@ -22,7 +22,8 @@ namespace ReduceReuseRecycle
         private SpriteFont _spriteFont;
         private Boolean _windowIsSnapped;
         private Score _score;
-        private gameObjects _gameObjects; 
+        private gameObjects _gameObjects;
+        private List<trashItem> _fallingItems = new List<trashItem>(); 
 
         public Game1()
         {
@@ -43,16 +44,29 @@ namespace ReduceReuseRecycle
             var trashBinTexture = Content.Load<Texture2D>("trashBin");
             var trashBinLocation = new Vector2(_gameBoundaries.Width/2 + 50f, _gameBoundaries.Height - 100f);
             var trashBin = new playerBin(trashBinTexture, trashBinLocation, _gameBoundaries); 
-            trashBin.setBinType(binType.Trash); 
+            trashBin.setBinType(TrashType.Trash); 
 
             var recycleBinTexture = Content.Load<Texture2D>("recycleBin");
             var recycleBinLocation = new Vector2(_gameBoundaries.Width/2 - 50f, _gameBoundaries.Height - 100f);
             var recycleBin = new playerBin(recycleBinTexture, recycleBinLocation, _gameBoundaries);
-            recycleBin.setBinType(binType.Recycle); 
+            recycleBin.setBinType(TrashType.Recycle); 
 
-            var trashItem1 = Content.Load<Texture2D>("trash1");
-            var recycleItem1 = Content.Load<Texture2D>("recycleBin");
 
+            // Abstract to Level Defined Method or some ish.....
+            var trashItem1Texture = Content.Load<Texture2D>("trash1");
+            var trashItemLocation = new Vector2(_gameBoundaries.Width / 2 - 50f, _gameBoundaries.Height/2 - 50f);
+            var trashItem1 = new trashItem(trashItem1Texture, trashItemLocation, _gameBoundaries); 
+            trashItem1.setTrashType(TrashType.Trash); 
+            
+            var recycleItem1Texture = Content.Load<Texture2D>("recycle1");
+            var recylceItemLocation = new Vector2(_gameBoundaries.Width / 2 + 50f, _gameBoundaries.Height/2 + 50f);
+            var recycleItem1 = new trashItem(recycleItem1Texture, recylceItemLocation, _gameBoundaries);
+            recycleItem1.setTrashType(TrashType.Trash);
+
+            _fallingItems.Add(trashItem1);
+            _fallingItems.Add(recycleItem1); 
+            //Abstract to Level Defined Method or some ish.....
+            
             var iconTexture = new Texture2D(GraphicsDevice, 100, 100); 
             iconTexture = Content.Load<Texture2D>("RecyCloneIcon");
             var icon = new Icon(iconTexture, Vector2.Zero, _gameBoundaries); 
@@ -66,7 +80,8 @@ namespace ReduceReuseRecycle
             _gameObjects.TrashBin = trashBin;
             _gameObjects.RecycleBin = recycleBin; 
             _gameObjects.Score = score;
-            _gameObjects.Icon = icon; 
+            _gameObjects.Icon = icon;
+            _gameObjects.FallingItems = _fallingItems; 
 
         }
         protected override void UnloadContent()
@@ -85,7 +100,11 @@ namespace ReduceReuseRecycle
             {
                 _gameObjects.TrashBin.Update(gameTime, _gameObjects);
                 _gameObjects.RecycleBin.Update(gameTime, _gameObjects); 
-                _gameObjects.Score.Update(gameTime, _gameObjects); 
+                _gameObjects.Score.Update(gameTime, _gameObjects);
+                foreach(trashItem aTrashItem in _gameObjects.FallingItems)
+                {
+                    aTrashItem.Update(gameTime, _gameObjects); 
+                }
             }
 
             base.Update(gameTime);
@@ -104,7 +123,11 @@ namespace ReduceReuseRecycle
             else
             {
                 _gameObjects.TrashBin.Draw(_spriteBatch);
-                _gameObjects.RecycleBin.Draw(_spriteBatch); 
+                _gameObjects.RecycleBin.Draw(_spriteBatch);
+                foreach (trashItem aTrashItem in _gameObjects.FallingItems)
+                {
+                    aTrashItem.Draw(_spriteBatch);
+                }
             }
             //MustEnd
             _spriteBatch.End(); 

@@ -1,7 +1,7 @@
 ﻿
 namespace ReduceReuseRecycle
 {
-    public enum binType
+    public enum TrashType
     {
         Trash, Recycle 
     }; 

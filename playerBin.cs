@@ -15,7 +15,7 @@ namespace ReduceReuseRecycle
        private Texture2D _trashBinTexture;
        private Vector2 _trashBinLocation;
        private Rectangle _gameBoundaries;
-       private binType _binType;
+       private TrashType _binType;
        private Boolean _mouseMove;
        private Vector2 touchPosition = Vector2.Zero;
 
@@ -27,7 +27,7 @@ namespace ReduceReuseRecycle
             Velocity = Vector2.Zero; 
             //_binType = aBinType; 
         }
-        public void setBinType(binType aBinType)
+        public void setBinType(TrashType aBinType)
         {
             _binType = aBinType; 
         }
